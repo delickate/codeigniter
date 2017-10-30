@@ -2,38 +2,43 @@
 This class allow to multiple API request simultaneously.
 
 # How to use this class?
+<pre>
 $obj = new multiapi();
+</pre>
 
 It can be use for both GET, POST requests
 
 # For HTTP POST request:
 
+<pre>
 //SANI: request one
-$obj->data[0]['url'] 	 		        = 'https://www.xxx.com/xxxx';
-$obj->data[0]['post'] 			      = array();
-$obj->data[0]['post']['sec_key']  = 'xxxxxxx';
-$obj->data[0]['post']['xxxx']     = 'xxxxxxxxxx';
+$obj->data[0]['url'] 	 	     = 'YOUR_URL_ONE';
+$obj->data[0]['post'] 	             = array();
+$obj->data[0]['post']['param_1']     = 'param_value_1';
+$obj->data[0]['post']['param_2']     = 'param_value_2';
 
 //SANI: request two
-$obj->data[1]['url'] 	 		  		        = 'http://wwww.xxxxx.com/xxx';
-$obj->data[1]['post'] 			  		      = array();
-$obj->data[1]['post']['sec_key']   		  = 'xxxxxxx';
-$obj->data[1]['post']['xxxx']  	  		  = 'xxxxx';
-$obj->data[1]['post']['xxxxxxxx']	  	  = 'xxxxxxx';
+$obj->data[1]['url'] 	 	 	          = 'YOUR_URL_TWO';
+$obj->data[1]['post'] 			  	  = array();
+$obj->data[1]['post']['param_1']   		  = 'param_value_1';
+$obj->data[1]['post']['param_2']  	  	  = 'param_value_2';
+$obj->data[1]['post']['param_3']	  	  = 'param_value_3';
 
 //SANI: POST DATA	
 $result = $obj->post_process_requests();
-echo "<pre>"; print_r($result);
-
+ print_r($result);
+</pre>
 
 
 
 # For HTTP GET request:
+<pre>
 $obj->data = array(
-					  'http://wwww.xxxxx.com/xxxxx',
-					  'http://wwww.xxxxx.com/xxxxx',
-					  'http://wwww.xxxxx.com/xxxxx',
+					  'YOUR_URL_1',
+					  'YOUR_URL_2',
+					  'YOUR_URL_3',
 					);
 //SANI: GET DATA	
 $result = $obj->get_process_requests();
-echo "<pre>"; print_r($result);
+print_r($result);
+</pre>
