@@ -28,8 +28,8 @@ $obj->data[1]['post']['auth']['param_1']     = 'param_value_1';
 //SANI: Request with params and header key
 $obj->data[3]['url'] 	 	     	     = 'YOUR_URL_ONE';
 $obj->data[3]['post'] 	             	     = array();
-$obj->data[3]['post']['auth']['HEADER_KEY']  = 'param_value_1';
-$obj->data[3]['post']['param_1']     	     = 'param_value_2';
+$obj->data[3]['post']['auth']['HEADER_KEY']  = 'key_value';
+$obj->data[3]['post']['param_1']     	     = 'param_value_1';
 
 //SANI: POST DATA	
 $result = $obj->post_process_requests();
