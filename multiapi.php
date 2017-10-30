@@ -2,13 +2,13 @@
 //SANI: Class for multi request API
 class multiapi
 {
-	//SANI: get how many request you want to entertain
+	//SANI: Declairing variables
 	public $data;
 	
-	//SANI: Distructor
+	//SANI: Constructor
 	function __construct() 
 	{
-       $this->data = array(); //SANI: Setting default number of request to one.
+       $this->data = array(); //SANI: Initializing variable
 	}
 	
 	
