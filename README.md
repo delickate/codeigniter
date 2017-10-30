@@ -20,9 +20,9 @@ $obj->data[0]['post']['param_2']     = 'param_value_2';
 //SANI: request two
 $obj->data[1]['url'] 	 	 	          = 'YOUR_URL_TWO';
 $obj->data[1]['post'] 			  	  = array();
-$obj->data[1]['post']['param_1']   		  = 'param_value_1';
-$obj->data[1]['post']['param_2']  	  	  = 'param_value_2';
-$obj->data[1]['post']['param_3']	  	  = 'param_value_3';
+$obj->data[1]['post']['SEC_KEY']   		  = 'param_value_1';
+$obj->data[1]['post']['USERNAME']  	  	  = 'param_value_2';
+$obj->data[1]['post']['PASSWORD']	  	  = 'param_value_3';
 
 //SANI: POST DATA	
 $result = $obj->post_process_requests();
