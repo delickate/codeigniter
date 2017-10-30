@@ -59,12 +59,19 @@ class multiapi
 					$password = $d['post']['auth']["password"];
 					$string   = $d['post']['auth']["string"];
 					
-					curl_setopt($curly[$id], CURLOPT_HTTPHEADER, $headers);
-					curl_setopt($curly[$id], CURLOPT_USERPWD, "$username:$password");
+					if(!empty($d['post']['auth']["headers"]))
+					{
+						curl_setopt($curly[$id], CURLOPT_HTTPHEADER, $headers);
+					}
+					
+					if(!empty($d['post']['auth']["username"]) && !empty($d['post']['auth']["password"]))
+					{
+						curl_setopt($curly[$id], CURLOPT_USERPWD, "$username:$password");
+					}
 					curl_setopt($curly[$id], CURLOPT_POSTFIELDS,    $string); 
 				}else{
 						curl_setopt($curly[$id], CURLOPT_POSTFIELDS, $d['post']);
-					 }	
+					 }		
 			  }
 			}
 			
