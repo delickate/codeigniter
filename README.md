@@ -1,5 +1,5 @@
 # codeigniter
-This class allow to multiple API request simultaneously.
+This class allows multiple API request simultaneously.
 
 # How to use this class?
 <pre>
