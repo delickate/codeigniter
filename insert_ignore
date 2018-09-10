@@ -1,0 +1,136 @@
+INSERT IGNORE IN CODEIGNITER
+===============================
+Step 1:
+/////////////////////////////////////////////////
+	// system/database/DB_active_rec.php
+	//
+	//            INSERT IGNORE 
+	//
+	//
+	//                      Added By:   SANI HYNE 
+	////////////////////////////////////////////////
+	
+	function insert_ignore($table = '', $set = NULL)
+	{
+		if ( ! is_null($set))
+		{
+			$this->set($set);
+		}
+
+		if (count($this->ar_set) == 0)
+		{
+			if ($this->db_debug)
+			{
+				return $this->display_error('db_must_use_set');
+			}
+			return FALSE;
+		}
+
+		if ($table == '')
+		{
+			if ( ! isset($this->ar_from[0]))
+			{
+				if ($this->db_debug)
+				{
+					return $this->display_error('db_must_set_table');
+				}
+				return FALSE;
+			}
+
+			$table = $this->ar_from[0];
+		}
+
+		$sql = $this->_insert_ignore($this->_protect_identifiers($table, TRUE, NULL, FALSE), array_keys($this->ar_set), array_values($this->ar_set));
+
+		$this->_reset_write();
+		return $this->query($sql);
+	}
+  
+  Step 2:
+  ==========
+  /////////////////////////////////////////////////
+	//system/database/DB_active_rec.php
+	//
+	//            INSERT IGNORE 
+	//
+	//
+	//                      Added By:   SANI HYNE  
+	////////////////////////////////////////////////
+	public function insert_ignore_batch($table = '', $set = NULL)
+	{
+		if ( ! is_null($set))
+		{
+			$this->set_insert_ignore_batch($set);
+		}
+
+		if (count($this->ar_set) == 0)
+		{
+			if ($this->db_debug)
+			{
+				//No valid data array.  Folds in cases where keys and values did not match up
+				return $this->display_error('db_must_use_set');
+			}
+			return FALSE;
+		}
+
+		if ($table == '')
+		{
+			if ( ! isset($this->ar_from[0]))
+			{
+				if ($this->db_debug)
+				{
+					return $this->display_error('db_must_set_table');
+				}
+				return FALSE;
+			}
+
+			$table = $this->ar_from[0];
+		}
+
+		// Batch this baby
+		for ($i = 0, $total = count($this->ar_set); $i < $total; $i = $i + 100)
+		{
+
+			$sql = $this->_insert_ignore_batch($this->_protect_identifiers($table, TRUE, NULL, FALSE), $this->ar_keys, array_slice($this->ar_set, $i, 100));
+
+			//echo $sql;
+
+			$this->query($sql);
+		}
+
+		$this->_reset_write();
+
+
+		return TRUE;
+	}
+  
+  Step 3:
+  ==============
+  /////////////////////////////////////////////////
+	// system/database/drivers/mysql/mysql_driver.php
+	//
+	//            INSERT IGNORE 
+	//
+	//
+	//                      Added By:   SANI HYNE 
+	////////////////////////////////////////////////
+	function _insert_ignore($table, $keys, $values)
+	{
+		return "INSERT IGNORE INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+	}
+  
+  /////////////////////////////////////////////////
+	//system/database/drivers/mysql/mysql_driver.php
+	//
+	//            INSERT IGNORE 
+	//
+	//
+	//                      Added By:   SANI HYNE 
+	////////////////////////////////////////////////
+	function _insert_ignore_batch($table, $keys, $values)
+	{
+		return "INSERT IGNORE INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
+	}
+  
+  
+  
