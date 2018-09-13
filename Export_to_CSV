@@ -1,0 +1,20 @@
+function export_csv($record)
+  {
+  			   $file_name  	  = 'PITB_'.strtotime(date('Y-m-d H:i:s')).'.csv';	
+  	            set_time_limit(0);			
+				$pdfPath 		= ROOTPATH. '/uploads/'.$file_name;
+				$basePath 		= base_url(). '/uploads/'.$file_name;
+				//$pdfPath =  ROOTPATH.'/assets/pdf/'.$file_name;
+				
+				$this->load->dbutil();
+				$this->load->helper('file');
+				$this->load->helper('download');
+				
+				$query     = $record;
+				$delimiter = ",";
+				$newline   = "\r\n";
+				$data      = $this->dbutil->csv_from_result($query, $delimiter, $newline);
+				write_file($pdfPath, $data); 	// write data into file. 
+				force_download($file_name, $data); // force download.
+				exit();
+  }
