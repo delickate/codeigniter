@@ -18,3 +18,7 @@ function export_csv($record)
 				force_download($file_name, $data); // force download.
 				exit();
   }
+  
+  //SANI: Usage
+  $execution = $this->db->query($query);  
+  $this->export_csv($execution);
