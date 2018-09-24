@@ -23,4 +23,5 @@ function catcherror_post()
 			$this->response($response, 200);
 	}
   
-  
+  # Make sure you have set 
+  'db_debug' => FALSE
