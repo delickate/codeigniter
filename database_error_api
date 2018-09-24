@@ -1,0 +1,26 @@
+# How to catch database error in codeigniter 3.0 API
+
+function catcherror_post()
+	{
+		$this->db->query("INSERT INTO tbl_post(pst_district) VALUES('sani')");
+		
+				$errorMessage 	= $this->db->error(); //echo $errorMessage['message']; die(); echo "<pre>";print_r($errorMessage);
+				
+				if(isset($errorMessage['code']) && $errorMessage['code'] > 0)
+				{
+					$result	 		= $errorMessage['message'];
+					$status 		= "Error";
+			    }else{
+						$result		= "Record has saved successfully.";
+						$status 	= "Success";
+				     }
+			
+			$response	= array("response_code" 	=> http_response_code(),
+									"response_status" 	=> $status,
+									"response_data" 	=> $result
+								   );
+			
+			$this->response($response, 200);
+	}
+  
+  
