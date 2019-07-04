@@ -1,0 +1,25 @@
+//SANI: insert ignore function
+function insert_ignore($table_name,$data)
+{
+	$keys   = array();
+	$values = array();
+	foreach($data as $rec => $data)
+	{
+		$keys[]   = $rec;
+		$values[] = $data;
+	}
+	$key_value = sprintf("'%s'", implode("', '", $values));	
+	$this->db->query("INSERT IGNORE INTO ".$table_name." (".implode(",",$keys).") VALUES(".$key_value.")");
+	
+}
+
+//How to call
+
+$table_name  = "tbl_login";
+
+$data = array("log_user_idfk" => "10",
+	          "log_checkedin" => date("Y-m-d H:i:s"),
+	
+             );
+             
+insert_ignore($table_name,$data);
